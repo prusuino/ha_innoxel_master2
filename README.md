@@ -1,3 +1,5 @@
+<p align="center"><img src="images/readme_header.png" alt="Innoxel Master 2" width="100%"></p>
+
 # Innoxel Master 2 for Home Assistant
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
