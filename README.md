@@ -1,6 +1,6 @@
-<p align="center"><img src="images/readme_header.png" alt="Innoxel Master 2" width="100%"></p>
-
 # Innoxel Master 2 for Home Assistant
+
+![Innoxel Master 2](readme_header.png)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
@@ -14,6 +14,17 @@ device server such as a Moxa NPort 5110 in TCP server mode.
 
 For the Innoxel Master 3 use
 [ha_innoxel_master3](https://github.com/prusuino/ha_innoxel_master3) instead.
+
+## Highlights
+
+- **Local and direct**: talks the serial protocol of the master through a serial device server on your own network — no cloud, no extra gateway software.
+- **Works like a wall button**: Home Assistant presses the keys you programmed in INNOXEL Setup and reads the real state of the outputs back.
+- **Switches and lights with true state**: a command only presses the key when the output is in the other state, so two automations never cancel each other out.
+- **Blinds**: one key impulse runs a blind to its end position, an impulse while it moves stops it.
+- **Outputs found for you**: leave the output address empty and the integration detects which output a key switches.
+- **Weather station**: temperature, wind speed, sun brightness east/south/west, twilight and rain appear on their own when a weather station is connected.
+- **Long key presses**: the `send_key` action sends an impulse, or press and release separately.
+- **INNOXEL Setup stays usable**: one switch releases the connection to the device server while you reprogram the master.
 
 ## What you need
 
