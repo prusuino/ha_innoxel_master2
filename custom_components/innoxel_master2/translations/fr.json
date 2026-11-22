@@ -1,0 +1,293 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Innoxel Master 2",
+        "description": "Le Master 2 n'a pas de port réseau. Indiquez l'adresse du serveur de port série (p. ex. Moxa NPort en mode serveur TCP) auquel il est raccordé.",
+        "data": {
+          "host": "Hôte",
+          "port": "Port TCP"
+        },
+        "data_description": {
+          "host": "Adresse IP ou nom d'hôte du serveur de port série.",
+          "port": "Port TCP du serveur de port série (par défaut chez Moxa : 4001)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Aucun Master 2 ne répond à cette adresse. Vérifiez l'adresse, le port et si un autre programme (p. ex. INNOXEL Setup) occupe la connexion."
+    },
+    "abort": {
+      "already_configured": "Ce master est déjà configuré."
+    }
+  },
+  "config_subentries": {
+    "switch": {
+      "initiate_flow": {
+        "user": "Ajouter un interrupteur"
+      },
+      "entry_type": "Interrupteur",
+      "step": {
+        "user": {
+          "title": "Ajouter un interrupteur",
+          "description": "Un interrupteur est une sortie qu'une touche fait basculer. La touche doit être programmée dans INNOXEL Setup pour faire basculer cette sortie.",
+          "data": {
+            "name": "Nom",
+            "key": "Touche",
+            "output": "Sortie"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28.",
+            "output": "Adresse de sortie telle que O0-3. Laisser vide pour la détecter : la touche est alors actionnée deux fois et l'intégration observe quelle sortie change."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifier l'interrupteur",
+          "data": {
+            "name": "Nom",
+            "key": "Touche",
+            "output": "Sortie"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28.",
+            "output": "Adresse de sortie telle que O0-3. Laisser vide pour la détecter : la touche est alors actionnée deux fois et l'intégration observe quelle sortie change."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Cette adresse n'est pas valide.",
+        "detect_failed": "La sortie n'a pas pu être détectée : l'appui sur la touche n'a pas modifié exactement une sortie. Saisissez l'adresse de la sortie."
+      },
+      "abort": {
+        "reconfigure_successful": "L'interrupteur a été modifié."
+      }
+    },
+    "light": {
+      "initiate_flow": {
+        "user": "Ajouter un éclairage"
+      },
+      "entry_type": "Éclairage",
+      "step": {
+        "user": {
+          "title": "Ajouter un éclairage",
+          "description": "Un éclairage sur une sortie de commutation qu'une touche fait basculer. La touche doit être programmée dans INNOXEL Setup pour faire basculer cette sortie.",
+          "data": {
+            "name": "Nom",
+            "key": "Touche",
+            "output": "Sortie"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28.",
+            "output": "Adresse de sortie telle que O0-3. Laisser vide pour la détecter : la touche est alors actionnée deux fois et l'intégration observe quelle sortie change."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifier l'éclairage",
+          "data": {
+            "name": "Nom",
+            "key": "Touche",
+            "output": "Sortie"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28.",
+            "output": "Adresse de sortie telle que O0-3. Laisser vide pour la détecter : la touche est alors actionnée deux fois et l'intégration observe quelle sortie change."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Cette adresse n'est pas valide.",
+        "detect_failed": "La sortie n'a pas pu être détectée : l'appui sur la touche n'a pas modifié exactement une sortie. Saisissez l'adresse de la sortie."
+      },
+      "abort": {
+        "reconfigure_successful": "L'éclairage a été modifié."
+      }
+    },
+    "dimmer": {
+      "initiate_flow": {
+        "user": "Ajouter un variateur"
+      },
+      "entry_type": "Variateur",
+      "step": {
+        "user": {
+          "title": "Ajouter un variateur",
+          "description": "Un éclairage sur un canal de variateur. La touche l'allume et l'éteint ; le master indique la valeur de variation mais n'accepte pas de consigne.",
+          "data": {
+            "name": "Nom",
+            "key": "Touche",
+            "dimmer": "Canal de variateur"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28.",
+            "dimmer": "Adresse de variateur telle que D0-2."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifier le variateur",
+          "data": {
+            "name": "Nom",
+            "key": "Touche",
+            "dimmer": "Canal de variateur"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28.",
+            "dimmer": "Adresse de variateur telle que D0-2."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Cette adresse n'est pas valide."
+      },
+      "abort": {
+        "reconfigure_successful": "Le variateur a été modifié."
+      }
+    },
+    "cover": {
+      "initiate_flow": {
+        "user": "Ajouter un store"
+      },
+      "entry_type": "Store",
+      "step": {
+        "user": {
+          "title": "Ajouter un store",
+          "description": "Un store avec une touche pour monter et une pour descendre. Un appui bref amène le store en fin de course, un appui pendant le mouvement l'arrête.",
+          "data": {
+            "name": "Nom",
+            "key_up": "Touche montée",
+            "key_down": "Touche descente",
+            "output_up": "Sortie montée",
+            "output_down": "Sortie descente"
+          },
+          "data_description": {
+            "key_up": "Adresse d'entrée telle que I12-1, ou l'événement d'INNOXEL Setup tel que GR30.",
+            "key_down": "Adresse d'entrée telle que I12-2, ou l'événement d'INNOXEL Setup tel que GR31.",
+            "output_up": "Facultatif. Sortie moteur pour la montée telle que O4-0 ; indique dans Home Assistant quand le store s'ouvre.",
+            "output_down": "Facultatif. Sortie moteur pour la descente telle que O4-1 ; indique dans Home Assistant quand le store se ferme."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifier le store",
+          "data": {
+            "name": "Nom",
+            "key_up": "Touche montée",
+            "key_down": "Touche descente",
+            "output_up": "Sortie montée",
+            "output_down": "Sortie descente"
+          },
+          "data_description": {
+            "key_up": "Adresse d'entrée telle que I12-1, ou l'événement d'INNOXEL Setup tel que GR30.",
+            "key_down": "Adresse d'entrée telle que I12-2, ou l'événement d'INNOXEL Setup tel que GR31.",
+            "output_up": "Facultatif. Sortie moteur pour la montée telle que O4-0 ; indique dans Home Assistant quand le store s'ouvre.",
+            "output_down": "Facultatif. Sortie moteur pour la descente telle que O4-1 ; indique dans Home Assistant quand le store se ferme."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Cette adresse n'est pas valide."
+      },
+      "abort": {
+        "reconfigure_successful": "Le store a été modifié."
+      }
+    },
+    "button": {
+      "initiate_flow": {
+        "user": "Ajouter une touche"
+      },
+      "entry_type": "Touche",
+      "step": {
+        "user": {
+          "title": "Ajouter une touche",
+          "description": "Un bouton dans Home Assistant qui actionne une touche du master, p. ex. pour une scène programmée dans INNOXEL Setup.",
+          "data": {
+            "name": "Nom",
+            "key": "Touche"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifier la touche",
+          "data": {
+            "name": "Nom",
+            "key": "Touche"
+          },
+          "data_description": {
+            "key": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Cette adresse n'est pas valide."
+      },
+      "abort": {
+        "reconfigure_successful": "La touche a été modifiée."
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "rain": {
+        "name": "Pluie"
+      }
+    },
+    "sensor": {
+      "sun_east": {
+        "name": "Soleil est"
+      },
+      "sun_south": {
+        "name": "Soleil sud"
+      },
+      "sun_west": {
+        "name": "Soleil ouest"
+      },
+      "twilight": {
+        "name": "Crépuscule"
+      }
+    },
+    "switch": {
+      "connection": {
+        "name": "Connexion au master"
+      }
+    }
+  },
+  "exceptions": {
+    "command_failed": {
+      "message": "Le master n'a pas accepté la commande : {error}"
+    },
+    "entry_not_unique": {
+      "message": "Plusieurs Innoxel Master 2 sont configurés, ou aucun. Choisissez-en un avec config_entry_id."
+    },
+    "invalid_input_address": {
+      "message": "{address} n'est pas une adresse d'entrée valide. Utilisez I10-1 ou GR28."
+    }
+  },
+  "services": {
+    "send_key": {
+      "name": "Envoyer une touche",
+      "description": "Simule une touche d'un module d'entrée : une impulsion brève, ou appui et relâchement séparés pour un appui long.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Master",
+          "description": "Le master auquel la touche est envoyée. Nécessaire seulement si plusieurs sont configurés."
+        },
+        "address": {
+          "name": "Touche",
+          "description": "Adresse d'entrée telle que I10-1, ou l'événement d'INNOXEL Setup tel que GR28."
+        },
+        "action": {
+          "name": "Action",
+          "description": "L'impulsion est un appui bref. Appui et relâchement forment ensemble un appui long."
+        }
+      }
+    }
+  },
+  "selector": {
+    "key_action": {
+      "options": {
+        "impulse": "Impulsion",
+        "press": "Appuyer",
+        "release": "Relâcher"
+      }
+    }
+  }
+}

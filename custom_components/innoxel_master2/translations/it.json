@@ -1,0 +1,293 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Innoxel Master 2",
+        "description": "Il Master 2 non ha una porta di rete. Indica l'indirizzo del server seriale (ad es. Moxa NPort in modalità server TCP) a cui è collegato.",
+        "data": {
+          "host": "Host",
+          "port": "Porta TCP"
+        },
+        "data_description": {
+          "host": "Indirizzo IP o nome host del server seriale.",
+          "port": "Porta TCP del server seriale (predefinita Moxa: 4001)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nessun Master 2 risponde a questo indirizzo. Controlla indirizzo e porta e se un altro programma (ad es. INNOXEL Setup) occupa la connessione."
+    },
+    "abort": {
+      "already_configured": "Questo master è già configurato."
+    }
+  },
+  "config_subentries": {
+    "switch": {
+      "initiate_flow": {
+        "user": "Aggiungi interruttore"
+      },
+      "entry_type": "Interruttore",
+      "step": {
+        "user": {
+          "title": "Aggiungi interruttore",
+          "description": "Un interruttore è un'uscita commutata da un tasto. Il tasto deve essere programmato in INNOXEL Setup per commutare questa uscita.",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto",
+            "output": "Uscita"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28.",
+            "output": "Indirizzo di uscita come O0-3. Lasciare vuoto per rilevarlo: il tasto viene premuto due volte e l'integrazione osserva quale uscita cambia."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifica interruttore",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto",
+            "output": "Uscita"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28.",
+            "output": "Indirizzo di uscita come O0-3. Lasciare vuoto per rilevarlo: il tasto viene premuto due volte e l'integrazione osserva quale uscita cambia."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Questo indirizzo non è valido.",
+        "detect_failed": "Non è stato possibile rilevare l'uscita: la pressione del tasto non ha modificato esattamente un'uscita. Inserisci l'indirizzo dell'uscita."
+      },
+      "abort": {
+        "reconfigure_successful": "L'interruttore è stato modificato."
+      }
+    },
+    "light": {
+      "initiate_flow": {
+        "user": "Aggiungi luce"
+      },
+      "entry_type": "Luce",
+      "step": {
+        "user": {
+          "title": "Aggiungi luce",
+          "description": "Una luce su un'uscita di commutazione comandata da un tasto. Il tasto deve essere programmato in INNOXEL Setup per commutare questa uscita.",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto",
+            "output": "Uscita"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28.",
+            "output": "Indirizzo di uscita come O0-3. Lasciare vuoto per rilevarlo: il tasto viene premuto due volte e l'integrazione osserva quale uscita cambia."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifica luce",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto",
+            "output": "Uscita"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28.",
+            "output": "Indirizzo di uscita come O0-3. Lasciare vuoto per rilevarlo: il tasto viene premuto due volte e l'integrazione osserva quale uscita cambia."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Questo indirizzo non è valido.",
+        "detect_failed": "Non è stato possibile rilevare l'uscita: la pressione del tasto non ha modificato esattamente un'uscita. Inserisci l'indirizzo dell'uscita."
+      },
+      "abort": {
+        "reconfigure_successful": "La luce è stata modificata."
+      }
+    },
+    "dimmer": {
+      "initiate_flow": {
+        "user": "Aggiungi dimmer"
+      },
+      "entry_type": "Dimmer",
+      "step": {
+        "user": {
+          "title": "Aggiungi dimmer",
+          "description": "Una luce su un canale dimmer. Il tasto la accende e la spegne; il master comunica il valore di regolazione ma non accetta un valore impostato.",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto",
+            "dimmer": "Canale dimmer"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28.",
+            "dimmer": "Indirizzo dimmer come D0-2."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifica dimmer",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto",
+            "dimmer": "Canale dimmer"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28.",
+            "dimmer": "Indirizzo dimmer come D0-2."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Questo indirizzo non è valido."
+      },
+      "abort": {
+        "reconfigure_successful": "Il dimmer è stato modificato."
+      }
+    },
+    "cover": {
+      "initiate_flow": {
+        "user": "Aggiungi tapparella"
+      },
+      "entry_type": "Tapparella",
+      "step": {
+        "user": {
+          "title": "Aggiungi tapparella",
+          "description": "Una tapparella con un tasto per la salita e uno per la discesa. Una pressione breve la porta a fine corsa, una pressione durante il movimento la ferma.",
+          "data": {
+            "name": "Nome",
+            "key_up": "Tasto salita",
+            "key_down": "Tasto discesa",
+            "output_up": "Uscita salita",
+            "output_down": "Uscita discesa"
+          },
+          "data_description": {
+            "key_up": "Indirizzo di ingresso come I12-1, oppure l'evento di INNOXEL Setup come GR30.",
+            "key_down": "Indirizzo di ingresso come I12-2, oppure l'evento di INNOXEL Setup come GR31.",
+            "output_up": "Facoltativo. Uscita motore per la salita come O4-0; mostra in Home Assistant quando la tapparella si apre.",
+            "output_down": "Facoltativo. Uscita motore per la discesa come O4-1; mostra in Home Assistant quando la tapparella si chiude."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifica tapparella",
+          "data": {
+            "name": "Nome",
+            "key_up": "Tasto salita",
+            "key_down": "Tasto discesa",
+            "output_up": "Uscita salita",
+            "output_down": "Uscita discesa"
+          },
+          "data_description": {
+            "key_up": "Indirizzo di ingresso come I12-1, oppure l'evento di INNOXEL Setup come GR30.",
+            "key_down": "Indirizzo di ingresso come I12-2, oppure l'evento di INNOXEL Setup come GR31.",
+            "output_up": "Facoltativo. Uscita motore per la salita come O4-0; mostra in Home Assistant quando la tapparella si apre.",
+            "output_down": "Facoltativo. Uscita motore per la discesa come O4-1; mostra in Home Assistant quando la tapparella si chiude."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Questo indirizzo non è valido."
+      },
+      "abort": {
+        "reconfigure_successful": "La tapparella è stata modificata."
+      }
+    },
+    "button": {
+      "initiate_flow": {
+        "user": "Aggiungi tasto"
+      },
+      "entry_type": "Tasto",
+      "step": {
+        "user": {
+          "title": "Aggiungi tasto",
+          "description": "Un pulsante in Home Assistant che preme un tasto del master, ad es. per una scena programmata in INNOXEL Setup.",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifica tasto",
+          "data": {
+            "name": "Nome",
+            "key": "Tasto"
+          },
+          "data_description": {
+            "key": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Questo indirizzo non è valido."
+      },
+      "abort": {
+        "reconfigure_successful": "Il tasto è stato modificato."
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "rain": {
+        "name": "Pioggia"
+      }
+    },
+    "sensor": {
+      "sun_east": {
+        "name": "Sole est"
+      },
+      "sun_south": {
+        "name": "Sole sud"
+      },
+      "sun_west": {
+        "name": "Sole ovest"
+      },
+      "twilight": {
+        "name": "Crepuscolo"
+      }
+    },
+    "switch": {
+      "connection": {
+        "name": "Connessione al master"
+      }
+    }
+  },
+  "exceptions": {
+    "command_failed": {
+      "message": "Il master non ha accettato il comando: {error}"
+    },
+    "entry_not_unique": {
+      "message": "Sono configurati più Innoxel Master 2, oppure nessuno. Scegline uno con config_entry_id."
+    },
+    "invalid_input_address": {
+      "message": "{address} non è un indirizzo di ingresso valido. Usa I10-1 o GR28."
+    }
+  },
+  "services": {
+    "send_key": {
+      "name": "Invia tasto",
+      "description": "Simula un tasto di un modulo di ingresso: un impulso breve, oppure pressione e rilascio separati per una pressione lunga.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Master",
+          "description": "Il master a cui inviare il tasto. Necessario solo se ne sono configurati più di uno."
+        },
+        "address": {
+          "name": "Tasto",
+          "description": "Indirizzo di ingresso come I10-1, oppure l'evento di INNOXEL Setup come GR28."
+        },
+        "action": {
+          "name": "Azione",
+          "description": "L'impulso è una pressione breve. Pressione e rilascio insieme formano una pressione lunga."
+        }
+      }
+    }
+  },
+  "selector": {
+    "key_action": {
+      "options": {
+        "impulse": "Impulso",
+        "press": "Premi",
+        "release": "Rilascia"
+      }
+    }
+  }
+}
