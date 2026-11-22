@@ -78,23 +78,26 @@ class Master2Cover(Master2ChannelEntity, CoverEntity):
 
     async def async_open_cover(self, **kwargs: Any) -> None:
         """Start a full run up."""
-        self._last_key = self._key_up
-        await self._send_key(self._key_up)
+        async with self.coordinator.command_lock:
+            self._last_key = self._key_up
+            await self._send_key(self._key_up)
 
     async def async_close_cover(self, **kwargs: Any) -> None:
         """Start a full run down."""
-        self._last_key = self._key_down
-        await self._send_key(self._key_down)
+        async with self.coordinator.command_lock:
+            self._last_key = self._key_down
+            await self._send_key(self._key_down)
 
     async def async_stop_cover(self, **kwargs: Any) -> None:
         """Stop a running blind with an impulse on the key of its direction."""
-        if self._output_up is not None or self._output_down is not None:
-            await self.coordinator.async_refresh()
-            if self.is_opening:
-                await self._send_key(self._key_up)
-            elif self.is_closing:
-                await self._send_key(self._key_down)
-            return
-        if self._last_key is not None:
-            await self._send_key(self._last_key)
-            self._last_key = None
+        async with self.coordinator.command_lock:
+            if self._output_up is not None or self._output_down is not None:
+                await self.coordinator.async_refresh()
+                if self.is_opening:
+                    await self._send_key(self._key_up)
+                elif self.is_closing:
+                    await self._send_key(self._key_down)
+                return
+            if self._last_key is not None:
+                await self._send_key(self._last_key)
+                self._last_key = None

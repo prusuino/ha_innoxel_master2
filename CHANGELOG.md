@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1 — 2026-11-22
+
+- **Quick taps no longer switch the wrong way.** Several commands for the same master arriving at once (tapping a switch quickly in the UI, two automations) could all read the old state and all press the key, so an output ended on when it should be off or the other way round. Commands now run one at a time; each one reads the state the previous one left.
+- **Ready for Home Assistant 2027.8.** The channel devices name the master device by its registry id (`via_device_id`) instead of the identifier Home Assistant reports as deprecated. Older Home Assistant versions keep the previous way.
+
 ## 1.2.0 — 2026-11-22
 
 - **New channel type: sensor.** *Add sensor* takes an output address and gives a `binary_sensor` with the state of that output, without a key. It is meant for what the master reports among the outputs but Home Assistant should not operate: a 230 V input module (NOXin-0800h, which is addressed like an output) or an output the master uses as a flag, such as the night setback or the release of a weather function.

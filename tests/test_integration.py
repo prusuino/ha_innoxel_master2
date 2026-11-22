@@ -291,3 +291,47 @@ async def test_a_key_that_switches_nothing_does_not_hang(hass: HomeAssistant, ma
     assert master.commands.count("y") == 12
     assert hass.states.get(switch).state == STATE_OFF
 
+
+async def test_quick_taps_run_one_after_the_other(hass: HomeAssistant, master: FakeMaster) -> None:
+    """Overlapping commands must not all see the old state and all press."""
+    import asyncio
+
+    master.wiring[(10, 1)] = [(0, 3)]
+    master.lag = 2  # the output takes a few polls, as on a busy bus
+    entry = await setup(hass, master, channel("switch", "Test lamp", key="I10-1", output="O0-3"))
+    switch = channel_entity(hass, entry, "switch", "Test lamp")
+
+    await asyncio.gather(
+        *(
+            hass.services.async_call("switch", "turn_on", {"entity_id": switch}, blocking=True)
+            for _ in range(4)
+        )
+    )
+    # Four "on" commands at once: one key press, the output ends on.
+    assert master.keys == [(10, 1, 2)]
+    assert master.outputs == {(0, 3)}
+    assert hass.states.get(switch).state == STATE_ON
+
+    await asyncio.gather(
+        hass.services.async_call("switch", "turn_off", {"entity_id": switch}, blocking=True),
+        hass.services.async_call("switch", "turn_on", {"entity_id": switch}, blocking=True),
+        hass.services.async_call("switch", "turn_off", {"entity_id": switch}, blocking=True),
+    )
+    # Applied in order: off, on, off - three presses, the output ends off.
+    assert len(master.keys) == 4
+    assert master.outputs == set()
+    assert hass.states.get(switch).state == STATE_OFF
+
+
+async def test_channel_devices_hang_below_the_master_device(hass: HomeAssistant, master: FakeMaster) -> None:
+    from homeassistant.helpers import device_registry as dr
+
+    entry = await setup(hass, master, channel("switch", "Test lamp", key="I10-1", output="O0-3"))
+    registry = dr.async_get(hass)
+    devices = dr.async_entries_for_config_entry(registry, entry.entry_id)
+    master_device = next(d for d in devices if ("innoxel_master2", entry.entry_id) in d.identifiers)
+    assert entry.runtime_data.master_device_id == master_device.id
+    children = [d for d in devices if d.id != master_device.id]
+    assert len(children) == 1
+    assert children[0].via_device_id == master_device.id
+

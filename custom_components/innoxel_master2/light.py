@@ -73,9 +73,10 @@ class Master2DimmerLight(Master2ChannelEntity, LightEntity):
         return {"dim_value": self._value}
 
     async def _set(self, on: bool) -> None:
-        await self.coordinator.async_refresh()
-        if self.is_on != on:
-            await self._send_key(self._key, done=lambda: self.is_on == on)
+        async with self.coordinator.command_lock:
+            await self.coordinator.async_refresh()
+            if self.is_on != on:
+                await self._send_key(self._key, done=lambda: self.is_on == on)
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the dimmer on with its key."""

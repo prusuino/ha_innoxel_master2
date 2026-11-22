@@ -9,6 +9,13 @@ from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .client import KEY_IMPULSE, Address, Master2Error, parse_address
+
+
+def _links_by_device_id() -> bool:
+    """Current Home Assistant names the parent of a device by its registry id
+    (`via_device_id`); older versions only know its identifier (`via_device`),
+    which newer ones report as deprecated (removed in 2027.8)."""
+    return "via_device_id" in DeviceInfo.__optional_keys__ | DeviceInfo.__required_keys__
 from .const import DOMAIN
 from .coordinator import Master2ConfigEntry, Master2Coordinator
 
@@ -42,12 +49,16 @@ class Master2ChannelEntity(CoordinatorEntity[Master2Coordinator]):
         super().__init__(coordinator)
         entry_id = coordinator.config_entry.entry_id
         self._attr_unique_id = f"{entry_id}_{subentry.subentry_id}"
-        self._attr_device_info = DeviceInfo(
+        info = DeviceInfo(
             identifiers={(DOMAIN, self._attr_unique_id)},
             name=subentry.title,
             manufacturer="Innoxel",
-            via_device=(DOMAIN, entry_id),
         )
+        if _links_by_device_id() and coordinator.master_device_id:
+            info["via_device_id"] = coordinator.master_device_id
+        else:
+            info["via_device"] = (DOMAIN, entry_id)
+        self._attr_device_info = info
 
     async def _send_key(
         self,

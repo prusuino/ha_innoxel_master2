@@ -56,6 +56,14 @@ class Master2Coordinator(DataUpdateCoordinator[Master2Data]):
         )
         self.client = client
         self.revision = revision
+        # Commands that read a state, decide and press a key run one at a
+        # time: the keys toggle, so two overlapping commands (quick taps in
+        # the UI, two automations) would both see the old state and both
+        # press. Polls keep running in between.
+        self.command_lock = asyncio.Lock()
+        # Registry id of the master device, the parent of the channel devices;
+        # set in async_setup_entry when the device is registered.
+        self.master_device_id: str | None = None
         self._poll_count = 0
         self._weather: Weather | None = None
         self.device_info = DeviceInfo(

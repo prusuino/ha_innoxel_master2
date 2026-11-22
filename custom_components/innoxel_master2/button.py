@@ -34,4 +34,5 @@ class Master2Button(Master2ChannelEntity, ButtonEntity):
 
     async def async_press(self) -> None:
         """Send a key impulse."""
-        await self._send_key(self._key)
+        async with self.coordinator.command_lock:
+            await self._send_key(self._key)

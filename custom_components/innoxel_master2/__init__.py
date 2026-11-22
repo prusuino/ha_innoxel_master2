@@ -110,9 +110,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: Master2ConfigEntry) -> b
     entry.runtime_data = coordinator
 
     # The master itself: parent of the channel devices, carries the weather.
-    dr.async_get(hass).async_get_or_create(
+    master = dr.async_get(hass).async_get_or_create(
         config_entry_id=entry.entry_id, **coordinator.device_info
     )
+    coordinator.master_device_id = master.id
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(_async_reload))
