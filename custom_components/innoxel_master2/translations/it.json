@@ -222,6 +222,41 @@
       "abort": {
         "reconfigure_successful": "Il tasto è stato modificato."
       }
+    },
+    "sensor": {
+      "initiate_flow": {
+        "user": "Aggiungi sensore"
+      },
+      "entry_type": "Sensore",
+      "step": {
+        "user": {
+          "title": "Aggiungi sensore",
+          "description": "Mostra lo stato di un'uscita senza comandarla – ad esempio un modulo di ingressi 230 V (NOXin-0800h) o un'uscita che il master usa come indicatore, come l'abbassamento notturno.",
+          "data": {
+            "name": "Nome",
+            "output": "Uscita"
+          },
+          "data_description": {
+            "output": "Indirizzo di uscita come O0-3. I moduli di ingressi 230 V (NOXin-0800h) sono indirizzati come uscite."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifica sensore",
+          "data": {
+            "name": "Nome",
+            "output": "Uscita"
+          },
+          "data_description": {
+            "output": "Indirizzo di uscita come O0-3. I moduli di ingressi 230 V (NOXin-0800h) sono indirizzati come uscite."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Questo indirizzo non è valido."
+      },
+      "abort": {
+        "reconfigure_successful": "Il sensore è stato modificato."
+      }
     }
   },
   "entity": {

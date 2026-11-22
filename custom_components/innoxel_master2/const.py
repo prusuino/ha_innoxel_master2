@@ -17,6 +17,7 @@ SUBENTRY_LIGHT = "light"
 SUBENTRY_DIMMER = "dimmer"
 SUBENTRY_COVER = "cover"
 SUBENTRY_BUTTON = "button"
+SUBENTRY_SENSOR = "sensor"
 
 CONF_KEY = "key"
 CONF_OUTPUT = "output"

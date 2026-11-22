@@ -222,6 +222,41 @@
       "abort": {
         "reconfigure_successful": "Die Taste wurde geändert."
       }
+    },
+    "sensor": {
+      "initiate_flow": {
+        "user": "Sensor hinzufügen"
+      },
+      "entry_type": "Sensor",
+      "step": {
+        "user": {
+          "title": "Sensor hinzufügen",
+          "description": "Zeigt den Zustand eines Ausgangs, ohne ihn zu bedienen – zum Beispiel ein 230-V-Eingangsmodul (NOXin-0800h) oder einen Ausgang, den der Master als Merker verwendet, etwa die Nachtabsenkung.",
+          "data": {
+            "name": "Name",
+            "output": "Ausgang"
+          },
+          "data_description": {
+            "output": "Ausgangsadresse wie O0-3. Eingangsmodule für 230 V (NOXin-0800h) werden wie Ausgänge adressiert."
+          }
+        },
+        "reconfigure": {
+          "title": "Sensor ändern",
+          "data": {
+            "name": "Name",
+            "output": "Ausgang"
+          },
+          "data_description": {
+            "output": "Ausgangsadresse wie O0-3. Eingangsmodule für 230 V (NOXin-0800h) werden wie Ausgänge adressiert."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Das ist keine gültige Adresse."
+      },
+      "abort": {
+        "reconfigure_successful": "Der Sensor wurde geändert."
+      }
     }
   },
   "entity": {

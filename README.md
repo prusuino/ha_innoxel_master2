@@ -42,6 +42,7 @@ The Master 2 predates the network-enabled Master 3: its only interface is an RS-
 | Dimmer | key, dimmer channel | on/off `light`, the dim value as attribute `dim_value` |
 | Blind | key up, key down, optionally the two motor outputs | `cover` with open, close and stop |
 | Key | key | `button`, e.g. for a scene programmed in the master |
+| Sensor | output | `binary_sensor` with the state of an output that is only read: a 230 V input module (NOXin-0800h, addressed like an output) or an output the master uses as a flag |
 
 In addition:
 
@@ -107,7 +108,7 @@ Requires Home Assistant **2025.4** or newer.
 
 1. Go to **Settings → Devices & Services → Add Integration** and search for **"Innoxel Master 2"**.
 2. Enter the **host** (IP address of the serial device server) and the **TCP port** (default `4001`). The integration asks the master for its firmware revision; setup only succeeds when a Master 2 answers.
-3. Open the new entry and add your channels with **Add switch**, **Add light**, **Add dimmer**, **Add blind** or **Add key**. Each channel gets a name and the key that operates it.
+3. Open the new entry and add your channels with **Add switch**, **Add light**, **Add dimmer**, **Add blind**, **Add key** or **Add sensor**. Each channel gets a name and the key that operates it; a sensor only gets the output it shows.
 
 For a switch or a light the output address can stay empty. The integration then presses the key twice and watches which output changes — the output ends in the state it had. Use this only where a brief switching does no harm, and enter the address by hand otherwise.
 
@@ -119,7 +120,7 @@ The Master 2 has no network port and no user accounts. Home Assistant reaches it
 
 ### What you need
 
-- An Innoxel Master 2 connected by RS-232 to a **serial device server** (serial-to-Ethernet converter). A Moxa NPort 5110 is tested; other device servers with a raw TCP server mode should work the same way.
+- An Innoxel Master 2 with **firmware 9.00 or newer** (the version Innoxel names for its own remote control, which uses the same interface; the revision is shown on the device page after setup), connected by RS-232 to a **serial device server** (serial-to-Ethernet converter). A Moxa NPort 5110 is tested; other device servers with a raw TCP server mode should work the same way.
 - The device server configured as described in [Serial device server](#serial-device-server).
 - **Keys programmed in INNOXEL Setup** for everything Home Assistant should control. The integration operates the installation the way a wall button does; it cannot switch an output directly. Virtual keys (touch panel events) are ideal: they need no hardware and do not collide with real buttons.
 

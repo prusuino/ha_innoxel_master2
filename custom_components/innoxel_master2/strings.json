@@ -222,6 +222,41 @@
       "abort": {
         "reconfigure_successful": "The key was changed."
       }
+    },
+    "sensor": {
+      "initiate_flow": {
+        "user": "Add sensor"
+      },
+      "entry_type": "Sensor",
+      "step": {
+        "user": {
+          "title": "Add sensor",
+          "description": "Shows the state of one output without operating it — for example a 230 V input module (NOXin-0800h), or an output the master uses as a flag such as the night setback.",
+          "data": {
+            "name": "Name",
+            "output": "Output"
+          },
+          "data_description": {
+            "output": "Output address such as O0-3. Input modules for 230 V (NOXin-0800h) are addressed like outputs."
+          }
+        },
+        "reconfigure": {
+          "title": "Change sensor",
+          "data": {
+            "name": "Name",
+            "output": "Output"
+          },
+          "data_description": {
+            "output": "Output address such as O0-3. Input modules for 230 V (NOXin-0800h) are addressed like outputs."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "This is not a valid address."
+      },
+      "abort": {
+        "reconfigure_successful": "The sensor was changed."
+      }
     }
   },
   "entity": {

@@ -184,3 +184,20 @@ async def test_a_channel_can_be_changed(hass: HomeAssistant, master: FakeMaster)
     subentry = entry.subentries[subentry_id]
     assert subentry.title == "Lamp"
     assert subentry.data == {"key": "I10-2", "output": "O0-4"}
+
+
+async def test_a_sensor_channel_takes_only_an_output(hass: HomeAssistant, master: FakeMaster) -> None:
+    entry = await loaded_entry(hass, master)
+    result = await add_channel(hass, entry, "sensor", {CONF_NAME: "Door contact", "output": "I8-2"})
+    assert result["type"] is FlowResultType.FORM
+    assert result["errors"] == {"output": "invalid_address"}
+
+    result = await hass.config_entries.subentries.async_configure(
+        result["flow_id"], {CONF_NAME: "Door contact", "output": "o8-2"}
+    )
+    assert result["type"] is FlowResultType.CREATE_ENTRY
+    subentry = next(iter(entry.subentries.values()))
+    assert subentry.subentry_type == "sensor"
+    assert subentry.data == {"output": "O8-2"}
+    assert master.keys == []  # nothing is pressed for a sensor
+

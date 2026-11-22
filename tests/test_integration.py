@@ -234,3 +234,28 @@ async def test_send_key_needs_exactly_one_master(hass: HomeAssistant, master: Fa
         DOMAIN, "send_key", {"address": "I10-1", "config_entry_id": first.entry_id}, blocking=True
     )
     assert master.keys == [(10, 1, 2)]
+
+
+async def test_a_sensor_channel_shows_an_output_and_presses_nothing(
+    hass: HomeAssistant, master: FakeMaster
+) -> None:
+    """A 230 V input module is addressed like an output: read it, never press."""
+    master.outputs = {(8, 2)}
+    entry = await setup(
+        hass,
+        master,
+        channel("sensor", "Door contact", output="O8-2"),
+        channel("sensor", "Night setback", output="O8-3"),
+    )
+    door = channel_entity(hass, entry, "binary_sensor", "Door contact")
+    night = channel_entity(hass, entry, "binary_sensor", "Night setback")
+    assert hass.states.get(door).state == STATE_ON
+    assert hass.states.get(night).state == STATE_OFF
+
+    master.outputs = {(8, 3)}
+    await entry.runtime_data.async_refresh()
+    await hass.async_block_till_done()
+    assert hass.states.get(door).state == STATE_OFF
+    assert hass.states.get(night).state == STATE_ON
+    assert master.keys == []
+

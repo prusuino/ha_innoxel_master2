@@ -34,6 +34,7 @@ from .const import (
     SUBENTRY_COVER,
     SUBENTRY_DIMMER,
     SUBENTRY_LIGHT,
+    SUBENTRY_SENSOR,
     SUBENTRY_SWITCH,
 )
 
@@ -97,6 +98,7 @@ class Master2ConfigFlow(ConfigFlow, domain=DOMAIN):
             SUBENTRY_DIMMER: DimmerSubentryFlow,
             SUBENTRY_COVER: CoverSubentryFlow,
             SUBENTRY_BUTTON: ButtonSubentryFlow,
+            SUBENTRY_SENSOR: SensorSubentryFlow,
         }
 
 
@@ -233,3 +235,9 @@ class ButtonSubentryFlow(ChannelSubentryFlow):
     """A single key, e.g. for a scene programmed in the master."""
 
     FIELDS = {CONF_KEY: True}
+
+
+class SensorSubentryFlow(ChannelSubentryFlow):
+    """An output that is only read, e.g. a 230 V input module or a flag."""
+
+    FIELDS = {CONF_OUTPUT: True}

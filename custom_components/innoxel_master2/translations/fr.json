@@ -222,6 +222,41 @@
       "abort": {
         "reconfigure_successful": "La touche a été modifiée."
       }
+    },
+    "sensor": {
+      "initiate_flow": {
+        "user": "Ajouter un capteur"
+      },
+      "entry_type": "Capteur",
+      "step": {
+        "user": {
+          "title": "Ajouter un capteur",
+          "description": "Affiche l'état d'une sortie sans la commander – par exemple un module d'entrées 230 V (NOXin-0800h) ou une sortie que le master utilise comme indicateur, comme l'abaissement nocturne.",
+          "data": {
+            "name": "Nom",
+            "output": "Sortie"
+          },
+          "data_description": {
+            "output": "Adresse de sortie telle que O0-3. Les modules d'entrées 230 V (NOXin-0800h) sont adressés comme des sorties."
+          }
+        },
+        "reconfigure": {
+          "title": "Modifier le capteur",
+          "data": {
+            "name": "Nom",
+            "output": "Sortie"
+          },
+          "data_description": {
+            "output": "Adresse de sortie telle que O0-3. Les modules d'entrées 230 V (NOXin-0800h) sont adressés comme des sorties."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Cette adresse n'est pas valide."
+      },
+      "abort": {
+        "reconfigure_successful": "Le capteur a été modifié."
+      }
     }
   },
   "entity": {

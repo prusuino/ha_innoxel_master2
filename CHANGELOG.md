@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 — 2026-11-22
+
+- **New channel type: sensor.** *Add sensor* takes an output address and gives a `binary_sensor` with the state of that output, without a key. It is meant for what the master reports among the outputs but Home Assistant should not operate: a 230 V input module (NOXin-0800h, which is addressed like an output) or an output the master uses as a flag, such as the night setback or the release of a weather function.
+- The README names the firmware the interface needs (9.00 or newer, according to Innoxel's documentation of its remote control).
+
 ## 1.1.0 — 2026-11-22
 
 - **Diagnostics download.** The entry's menu under *Settings → Devices & services* offers *Download diagnostics*: the firmware revision, the raw state and weather answers of the master, the channels with their addresses and the entities with their current state. The address of the serial device server is redacted. The bug report form asks for the file.
