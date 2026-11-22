@@ -185,6 +185,10 @@ The switch is on after every restart of Home Assistant. Automations that send ke
 
 The master has no push channel. The integration reads the state of all outputs and dimmers every two seconds and the weather station every thirty seconds; after a key that Home Assistant sent, the state is read back within a fraction of a second. A change made at a wall button shows up after two seconds at the latest.
 
+## Diagnostics
+
+**Download diagnostics** in the entry's menu (⋮) under **Settings → Devices & services → Innoxel Master 2** gives one file with the firmware revision, the raw state and weather answers of the master exactly as they came over the serial line, your channels with their addresses, and the entities with their current state. The address of the serial device server is redacted; the names of your channels stay readable. Attach the file to a bug report — with the raw answers a dimmer value or a weather value can be checked without access to your installation.
+
 ## Removal
 
 1. **Settings → Devices & services → Innoxel Master 2**, open the entry's menu (⋮) and choose **Delete**. The entities and their history go with the entry; the master itself is not changed.

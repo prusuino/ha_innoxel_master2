@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time. The versions and the firmware revision of the master usually save a round of questions.
+        Thanks for taking the time. The versions and the diagnostics file usually save a round of questions.
   - type: textarea
     id: what
     attributes:
@@ -18,7 +18,7 @@ body:
     attributes:
       label: Version of Innoxel Master 2
       description: Settings → Devices & services → Innoxel Master 2, or the Marketplace / HACS entry.
-      placeholder: "1.0.0"
+      placeholder: "1.1.0"
     validations:
       required: true
   - type: input
@@ -35,6 +35,11 @@ body:
       label: Firmware revision of the master and serial device server
       description: The revision is shown on the device page of the integration. Add the model of the device server.
       placeholder: "REV 09.23, Moxa NPort 5110"
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Settings → Devices & services → Innoxel Master 2 → ⋮ → Download diagnostics. Drag the file in here. The address of the device server is redacted in it; the names of your channels are not.
   - type: textarea
     id: log
     attributes:

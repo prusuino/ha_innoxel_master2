@@ -53,7 +53,7 @@ rules:
 
   # Gold
   devices: done
-  diagnostics: todo
+  diagnostics: done
   discovery:
     status: exempt
     comment: A serial device server does not announce the master behind it.

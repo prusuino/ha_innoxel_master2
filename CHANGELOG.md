@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 — 2026-11-22
+
+- **Diagnostics download.** The entry's menu under *Settings → Devices & services* offers *Download diagnostics*: the firmware revision, the raw state and weather answers of the master, the channels with their addresses and the entities with their current state. The address of the serial device server is redacted. The bug report form asks for the file.
+
 ## 1.0.0 — 2026-11-22
 
 - **French and Italian.** The dialogs, entity names, the action and its error messages are translated into French and Italian, next to German and English.

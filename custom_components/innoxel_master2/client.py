@@ -195,6 +195,8 @@ class Master2Client:
         # While paused the client refuses to connect, so that another program
         # (INNOXEL Setup) can use the single connection of the device server.
         self.paused = False
+        # The weather answer as the master sent it, kept for the diagnostics.
+        self.last_weather_raw: str | None = None
 
     async def pause(self) -> None:
         """Release the connection and refuse requests until resume()."""
@@ -302,6 +304,7 @@ class Master2Client:
     async def get_weather(self) -> Weather:
         """Return the weather station data."""
         answer = await self._request(CMD_WEATHER, data=True, return_code=True)
+        self.last_weather_raw = answer
         return decode_weather(answer)
 
     async def send_key(self, address: Address, action: int = KEY_IMPULSE) -> None:
