@@ -243,6 +243,11 @@
       "twilight": {
         "name": "Dämmerung"
       }
+    },
+    "switch": {
+      "connection": {
+        "name": "Verbindung zum Master"
+      }
     }
   },
   "exceptions": {

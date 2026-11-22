@@ -45,14 +45,31 @@ A weather station connected to the master shows up automatically as sensors
 The action `innoxel_master2.send_key` sends a key impulse, or press and
 release separately for a long key press.
 
+## Working with INNOXEL Setup
+
+Most serial device servers accept a single TCP connection, and Home Assistant
+holds it permanently. INNOXEL Setup therefore cannot reach the master while
+the integration is running.
+
+Before you change the programming of the master with INNOXEL Setup:
+
+1. Turn off the switch **Connection to the master** on the device page of the
+   integration. Home Assistant releases the connection; all channels become
+   unavailable.
+2. Do your work in INNOXEL Setup and close its connection.
+3. Turn the switch on again.
+
+The switch is on after every restart of Home Assistant. Automations that send
+keys fail with an error while the connection is switched off.
+
 ## Limitations
 
 - The master is polled every two seconds; it cannot push changes.
 - The master does not report channel names, so channels are added by hand.
 - A dimmer cannot be set to a value, only operated with its key.
 - The blind position is unknown to the master.
-- Most device servers accept one TCP connection. While Home Assistant is
-  connected, INNOXEL Setup cannot use the same device server, and vice versa.
+- Most device servers accept one TCP connection, see
+  [Working with INNOXEL Setup](#working-with-innoxel-setup).
 
 ## Disclaimer
 

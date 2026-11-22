@@ -5,8 +5,10 @@ from typing import Any
 
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.config_entries import ConfigSubentry
+from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .client import parse_address
 from .const import CONF_KEY, CONF_OUTPUT, SUBENTRY_SWITCH
@@ -20,6 +22,7 @@ async def async_setup_entry(
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Create one switch per switch channel."""
+    async_add_entities([Master2ConnectionSwitch(entry.runtime_data)])
     for subentry in subentries_of_type(entry, SUBENTRY_SWITCH):
         async_add_entities(
             [Master2Switch(entry.runtime_data, subentry)],
@@ -60,3 +63,40 @@ class Master2ToggleEntity(Master2ChannelEntity):
 
 class Master2Switch(Master2ToggleEntity, SwitchEntity):
     """A switch output of the master."""
+
+
+class Master2ConnectionSwitch(CoordinatorEntity[Master2Coordinator], SwitchEntity):
+    """Releases the connection to the serial device server.
+
+    A device server usually accepts one connection. Switch this off before
+    working with INNOXEL Setup and on again afterwards.
+    """
+
+    _attr_has_entity_name = True
+    _attr_translation_key = "connection"
+    _attr_entity_category = EntityCategory.CONFIG
+
+    def __init__(self, coordinator: Master2Coordinator) -> None:
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{coordinator.config_entry.entry_id}_connection"
+        self._attr_device_info = coordinator.device_info
+
+    @property
+    def available(self) -> bool:
+        """Stay available while the connection is switched off."""
+        return True
+
+    @property
+    def is_on(self) -> bool:
+        """Return whether the integration uses the connection."""
+        return self.coordinator.connected
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        """Take the connection and resume polling."""
+        await self.coordinator.async_set_connected(True)
+        self.async_write_ha_state()
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        """Release the connection and stop polling."""
+        await self.coordinator.async_set_connected(False)
+        self.async_write_ha_state()

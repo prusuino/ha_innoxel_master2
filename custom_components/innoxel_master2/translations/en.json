@@ -243,6 +243,11 @@
       "twilight": {
         "name": "Twilight"
       }
+    },
+    "switch": {
+      "connection": {
+        "name": "Connection to the master"
+      }
     }
   },
   "exceptions": {

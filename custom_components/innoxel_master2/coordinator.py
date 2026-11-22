@@ -75,6 +75,23 @@ class Master2Coordinator(DataUpdateCoordinator[Master2Data]):
         self._poll_count += 1
         return Master2Data(states, self._weather)
 
+    @property
+    def connected(self) -> bool:
+        """Return whether the integration uses the connection to the master."""
+        return not self.client.paused
+
+    async def async_set_connected(self, connected: bool) -> None:
+        """Release the connection (e.g. for INNOXEL Setup) or take it again."""
+        if connected:
+            self.client.resume()
+            self.update_interval = timedelta(seconds=SCAN_INTERVAL)
+            await self.async_refresh()
+            return
+        self.update_interval = None
+        await self.client.pause()
+        # Mark the data as stale so that all channels become unavailable.
+        self.async_set_update_error(UpdateFailed("The connection is switched off"))
+
     async def async_send_key(self, address: Address, action: int = KEY_IMPULSE) -> None:
         """Simulate a key and read the states back shortly afterwards."""
         await self.client.send_key(address, action)

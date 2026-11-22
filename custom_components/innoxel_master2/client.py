@@ -192,6 +192,18 @@ class Master2Client:
         self._reader: asyncio.StreamReader | None = None
         self._writer: asyncio.StreamWriter | None = None
         self._lock = asyncio.Lock()
+        # While paused the client refuses to connect, so that another program
+        # (INNOXEL Setup) can use the single connection of the device server.
+        self.paused = False
+
+    async def pause(self) -> None:
+        """Release the connection and refuse requests until resume()."""
+        self.paused = True
+        await self.close()
+
+    def resume(self) -> None:
+        """Allow requests again; the next one reconnects."""
+        self.paused = False
 
     async def _connect(self) -> None:
         try:
@@ -240,6 +252,8 @@ class Master2Client:
     async def _request(self, command: str, *, data: bool, return_code: bool) -> str:
         """Send a command and return its data line ("" when it has none)."""
         async with self._lock:
+            if self.paused:
+                raise Master2ConnectionError("The connection is switched off")
             last_error: Master2Error | None = None
             # One retry on a fresh connection: a device server silently drops
             # idle connections, which only shows on the next request.
