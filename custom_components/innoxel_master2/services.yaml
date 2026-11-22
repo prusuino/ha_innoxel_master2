@@ -1,0 +1,22 @@
+send_key:
+  fields:
+    config_entry_id:
+      required: false
+      selector:
+        config_entry:
+          integration: innoxel_master2
+    address:
+      required: true
+      example: "GR28"
+      selector:
+        text:
+    action:
+      required: false
+      default: impulse
+      selector:
+        select:
+          translation_key: key_action
+          options:
+            - impulse
+            - press
+            - release

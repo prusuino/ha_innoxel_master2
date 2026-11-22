@@ -1,0 +1,288 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Innoxel Master 2",
+        "description": "The Master 2 has no network port. Enter the address of the serial device server (e.g. Moxa NPort in TCP server mode) it is connected to.",
+        "data": {
+          "host": "Host",
+          "port": "TCP port"
+        },
+        "data_description": {
+          "host": "IP address or host name of the serial device server.",
+          "port": "TCP port of the serial device server (Moxa default: 4001)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "No Master 2 answers at this address. Check the address, the port and whether another program (e.g. INNOXEL Setup) holds the connection."
+    },
+    "abort": {
+      "already_configured": "This master is already configured."
+    }
+  },
+  "config_subentries": {
+    "switch": {
+      "initiate_flow": {
+        "user": "Add switch"
+      },
+      "entry_type": "Switch",
+      "step": {
+        "user": {
+          "title": "Add switch",
+          "description": "A switch is an output that a key toggles. The key must be programmed in INNOXEL Setup to toggle this output.",
+          "data": {
+            "name": "Name",
+            "key": "Key",
+            "output": "Output"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28.",
+            "output": "Output address such as O0-3. Leave empty to detect it: the key is then pressed twice and the integration watches which output changes."
+          }
+        },
+        "reconfigure": {
+          "title": "Change switch",
+          "data": {
+            "name": "Name",
+            "key": "Key",
+            "output": "Output"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28.",
+            "output": "Output address such as O0-3. Leave empty to detect it: the key is then pressed twice and the integration watches which output changes."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "This is not a valid address.",
+        "detect_failed": "The output could not be detected: pressing the key did not change exactly one output. Enter the output address."
+      },
+      "abort": {
+        "reconfigure_successful": "The switch was changed."
+      }
+    },
+    "light": {
+      "initiate_flow": {
+        "user": "Add light"
+      },
+      "entry_type": "Light",
+      "step": {
+        "user": {
+          "title": "Add light",
+          "description": "A light on a switch output that a key toggles. The key must be programmed in INNOXEL Setup to toggle this output.",
+          "data": {
+            "name": "Name",
+            "key": "Key",
+            "output": "Output"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28.",
+            "output": "Output address such as O0-3. Leave empty to detect it: the key is then pressed twice and the integration watches which output changes."
+          }
+        },
+        "reconfigure": {
+          "title": "Change light",
+          "data": {
+            "name": "Name",
+            "key": "Key",
+            "output": "Output"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28.",
+            "output": "Output address such as O0-3. Leave empty to detect it: the key is then pressed twice and the integration watches which output changes."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "This is not a valid address.",
+        "detect_failed": "The output could not be detected: pressing the key did not change exactly one output. Enter the output address."
+      },
+      "abort": {
+        "reconfigure_successful": "The light was changed."
+      }
+    },
+    "dimmer": {
+      "initiate_flow": {
+        "user": "Add dimmer"
+      },
+      "entry_type": "Dimmer",
+      "step": {
+        "user": {
+          "title": "Add dimmer",
+          "description": "A light on a dimmer channel. The key switches it on and off; the master reports the dim value but cannot be told to set one.",
+          "data": {
+            "name": "Name",
+            "key": "Key",
+            "dimmer": "Dimmer channel"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28.",
+            "dimmer": "Dimmer address such as D0-2."
+          }
+        },
+        "reconfigure": {
+          "title": "Change dimmer",
+          "data": {
+            "name": "Name",
+            "key": "Key",
+            "dimmer": "Dimmer channel"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28.",
+            "dimmer": "Dimmer address such as D0-2."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "This is not a valid address."
+      },
+      "abort": {
+        "reconfigure_successful": "The dimmer was changed."
+      }
+    },
+    "cover": {
+      "initiate_flow": {
+        "user": "Add blind"
+      },
+      "entry_type": "Blind",
+      "step": {
+        "user": {
+          "title": "Add blind",
+          "description": "A blind with one key for up and one for down. A short key press runs the blind to its end position, a press while it moves stops it.",
+          "data": {
+            "name": "Name",
+            "key_up": "Key up",
+            "key_down": "Key down",
+            "output_up": "Output up",
+            "output_down": "Output down"
+          },
+          "data_description": {
+            "key_up": "Input address such as I12-1, or the event from INNOXEL Setup such as GR30.",
+            "key_down": "Input address such as I12-2, or the event from INNOXEL Setup such as GR31.",
+            "output_up": "Optional. Motor output for up such as O4-0; shows in Home Assistant when the blind opens.",
+            "output_down": "Optional. Motor output for down such as O4-1; shows in Home Assistant when the blind closes."
+          }
+        },
+        "reconfigure": {
+          "title": "Change blind",
+          "data": {
+            "name": "Name",
+            "key_up": "Key up",
+            "key_down": "Key down",
+            "output_up": "Output up",
+            "output_down": "Output down"
+          },
+          "data_description": {
+            "key_up": "Input address such as I12-1, or the event from INNOXEL Setup such as GR30.",
+            "key_down": "Input address such as I12-2, or the event from INNOXEL Setup such as GR31.",
+            "output_up": "Optional. Motor output for up such as O4-0; shows in Home Assistant when the blind opens.",
+            "output_down": "Optional. Motor output for down such as O4-1; shows in Home Assistant when the blind closes."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "This is not a valid address."
+      },
+      "abort": {
+        "reconfigure_successful": "The blind was changed."
+      }
+    },
+    "button": {
+      "initiate_flow": {
+        "user": "Add key"
+      },
+      "entry_type": "Key",
+      "step": {
+        "user": {
+          "title": "Add key",
+          "description": "A button in Home Assistant that presses one key of the master, e.g. for a scene programmed in INNOXEL Setup.",
+          "data": {
+            "name": "Name",
+            "key": "Key"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28."
+          }
+        },
+        "reconfigure": {
+          "title": "Change key",
+          "data": {
+            "name": "Name",
+            "key": "Key"
+          },
+          "data_description": {
+            "key": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "This is not a valid address."
+      },
+      "abort": {
+        "reconfigure_successful": "The key was changed."
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "rain": {
+        "name": "Rain"
+      }
+    },
+    "sensor": {
+      "sun_east": {
+        "name": "Sun east"
+      },
+      "sun_south": {
+        "name": "Sun south"
+      },
+      "sun_west": {
+        "name": "Sun west"
+      },
+      "twilight": {
+        "name": "Twilight"
+      }
+    }
+  },
+  "exceptions": {
+    "command_failed": {
+      "message": "The master did not accept the command: {error}"
+    },
+    "entry_not_unique": {
+      "message": "Several or no Innoxel Master 2 are set up. Select one with config_entry_id."
+    },
+    "invalid_input_address": {
+      "message": "{address} is not a valid input address. Use I10-1 or GR28."
+    }
+  },
+  "services": {
+    "send_key": {
+      "name": "Send key",
+      "description": "Simulates a key of an input module: a short impulse, or press and release separately for a long key press.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Master",
+          "description": "The master to send the key to. Only needed when several are set up."
+        },
+        "address": {
+          "name": "Key",
+          "description": "Input address such as I10-1, or the event from INNOXEL Setup such as GR28."
+        },
+        "action": {
+          "name": "Action",
+          "description": "Impulse is a short key press. Press and release together make a long key press."
+        }
+      }
+    }
+  },
+  "selector": {
+    "key_action": {
+      "options": {
+        "impulse": "Impulse",
+        "press": "Press",
+        "release": "Release"
+      }
+    }
+  }
+}

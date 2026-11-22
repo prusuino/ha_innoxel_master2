@@ -1,0 +1,288 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Innoxel Master 2",
+        "description": "Der Master 2 hat keinen Netzwerkanschluss. Gib die Adresse des seriellen Geräteservers an (z. B. Moxa NPort im TCP-Server-Modus), an dem er hängt.",
+        "data": {
+          "host": "Host",
+          "port": "TCP-Port"
+        },
+        "data_description": {
+          "host": "IP-Adresse oder Hostname des seriellen Geräteservers.",
+          "port": "TCP-Port des seriellen Geräteservers (Moxa-Standard: 4001)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unter dieser Adresse antwortet kein Master 2. Prüfe Adresse und Port und ob ein anderes Programm (z. B. INNOXEL Setup) die Verbindung belegt."
+    },
+    "abort": {
+      "already_configured": "Dieser Master ist bereits eingerichtet."
+    }
+  },
+  "config_subentries": {
+    "switch": {
+      "initiate_flow": {
+        "user": "Schalter hinzufügen"
+      },
+      "entry_type": "Schalter",
+      "step": {
+        "user": {
+          "title": "Schalter hinzufügen",
+          "description": "Ein Schalter ist ein Ausgang, den eine Taste umschaltet. Die Taste muss in INNOXEL Setup so programmiert sein, dass sie diesen Ausgang umschaltet.",
+          "data": {
+            "name": "Name",
+            "key": "Taste",
+            "output": "Ausgang"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28.",
+            "output": "Ausgangsadresse wie O0-3. Leer lassen, um sie zu erkennen: die Taste wird dann zweimal gedrückt und die Integration beobachtet, welcher Ausgang sich ändert."
+          }
+        },
+        "reconfigure": {
+          "title": "Schalter ändern",
+          "data": {
+            "name": "Name",
+            "key": "Taste",
+            "output": "Ausgang"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28.",
+            "output": "Ausgangsadresse wie O0-3. Leer lassen, um sie zu erkennen: die Taste wird dann zweimal gedrückt und die Integration beobachtet, welcher Ausgang sich ändert."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Das ist keine gültige Adresse.",
+        "detect_failed": "Der Ausgang liess sich nicht erkennen: der Tastendruck hat nicht genau einen Ausgang verändert. Bitte die Ausgangsadresse eingeben."
+      },
+      "abort": {
+        "reconfigure_successful": "Der Schalter wurde geändert."
+      }
+    },
+    "light": {
+      "initiate_flow": {
+        "user": "Licht hinzufügen"
+      },
+      "entry_type": "Licht",
+      "step": {
+        "user": {
+          "title": "Licht hinzufügen",
+          "description": "Ein Licht an einem Schaltausgang, den eine Taste umschaltet. Die Taste muss in INNOXEL Setup so programmiert sein, dass sie diesen Ausgang umschaltet.",
+          "data": {
+            "name": "Name",
+            "key": "Taste",
+            "output": "Ausgang"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28.",
+            "output": "Ausgangsadresse wie O0-3. Leer lassen, um sie zu erkennen: die Taste wird dann zweimal gedrückt und die Integration beobachtet, welcher Ausgang sich ändert."
+          }
+        },
+        "reconfigure": {
+          "title": "Licht ändern",
+          "data": {
+            "name": "Name",
+            "key": "Taste",
+            "output": "Ausgang"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28.",
+            "output": "Ausgangsadresse wie O0-3. Leer lassen, um sie zu erkennen: die Taste wird dann zweimal gedrückt und die Integration beobachtet, welcher Ausgang sich ändert."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Das ist keine gültige Adresse.",
+        "detect_failed": "Der Ausgang liess sich nicht erkennen: der Tastendruck hat nicht genau einen Ausgang verändert. Bitte die Ausgangsadresse eingeben."
+      },
+      "abort": {
+        "reconfigure_successful": "Das Licht wurde geändert."
+      }
+    },
+    "dimmer": {
+      "initiate_flow": {
+        "user": "Dimmer hinzufügen"
+      },
+      "entry_type": "Dimmer",
+      "step": {
+        "user": {
+          "title": "Dimmer hinzufügen",
+          "description": "Ein Licht an einem Dimmerkanal. Die Taste schaltet es ein und aus; der Master meldet den Dimmwert, nimmt aber keinen Sollwert an.",
+          "data": {
+            "name": "Name",
+            "key": "Taste",
+            "dimmer": "Dimmerkanal"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28.",
+            "dimmer": "Dimmeradresse wie D0-2."
+          }
+        },
+        "reconfigure": {
+          "title": "Dimmer ändern",
+          "data": {
+            "name": "Name",
+            "key": "Taste",
+            "dimmer": "Dimmerkanal"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28.",
+            "dimmer": "Dimmeradresse wie D0-2."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Das ist keine gültige Adresse."
+      },
+      "abort": {
+        "reconfigure_successful": "Der Dimmer wurde geändert."
+      }
+    },
+    "cover": {
+      "initiate_flow": {
+        "user": "Store hinzufügen"
+      },
+      "entry_type": "Store",
+      "step": {
+        "user": {
+          "title": "Store hinzufügen",
+          "description": "Eine Store mit je einer Taste für Auf und Ab. Ein kurzer Tastendruck fährt die Store bis zur Endlage, ein Tastendruck während der Fahrt stoppt sie.",
+          "data": {
+            "name": "Name",
+            "key_up": "Taste Auf",
+            "key_down": "Taste Ab",
+            "output_up": "Ausgang Auf",
+            "output_down": "Ausgang Ab"
+          },
+          "data_description": {
+            "key_up": "Eingangsadresse wie I12-1 oder das Ereignis aus INNOXEL Setup wie GR30.",
+            "key_down": "Eingangsadresse wie I12-2 oder das Ereignis aus INNOXEL Setup wie GR31.",
+            "output_up": "Optional. Motorausgang für Auf wie O4-0; zeigt in Home Assistant, wenn die Store öffnet.",
+            "output_down": "Optional. Motorausgang für Ab wie O4-1; zeigt in Home Assistant, wenn die Store schliesst."
+          }
+        },
+        "reconfigure": {
+          "title": "Store ändern",
+          "data": {
+            "name": "Name",
+            "key_up": "Taste Auf",
+            "key_down": "Taste Ab",
+            "output_up": "Ausgang Auf",
+            "output_down": "Ausgang Ab"
+          },
+          "data_description": {
+            "key_up": "Eingangsadresse wie I12-1 oder das Ereignis aus INNOXEL Setup wie GR30.",
+            "key_down": "Eingangsadresse wie I12-2 oder das Ereignis aus INNOXEL Setup wie GR31.",
+            "output_up": "Optional. Motorausgang für Auf wie O4-0; zeigt in Home Assistant, wenn die Store öffnet.",
+            "output_down": "Optional. Motorausgang für Ab wie O4-1; zeigt in Home Assistant, wenn die Store schliesst."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Das ist keine gültige Adresse."
+      },
+      "abort": {
+        "reconfigure_successful": "Die Store wurde geändert."
+      }
+    },
+    "button": {
+      "initiate_flow": {
+        "user": "Taste hinzufügen"
+      },
+      "entry_type": "Taste",
+      "step": {
+        "user": {
+          "title": "Taste hinzufügen",
+          "description": "Eine Schaltfläche in Home Assistant, die eine Taste des Masters drückt, z. B. für eine in INNOXEL Setup programmierte Szene.",
+          "data": {
+            "name": "Name",
+            "key": "Taste"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28."
+          }
+        },
+        "reconfigure": {
+          "title": "Taste ändern",
+          "data": {
+            "name": "Name",
+            "key": "Taste"
+          },
+          "data_description": {
+            "key": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28."
+          }
+        }
+      },
+      "error": {
+        "invalid_address": "Das ist keine gültige Adresse."
+      },
+      "abort": {
+        "reconfigure_successful": "Die Taste wurde geändert."
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "rain": {
+        "name": "Regen"
+      }
+    },
+    "sensor": {
+      "sun_east": {
+        "name": "Sonne Ost"
+      },
+      "sun_south": {
+        "name": "Sonne Süd"
+      },
+      "sun_west": {
+        "name": "Sonne West"
+      },
+      "twilight": {
+        "name": "Dämmerung"
+      }
+    }
+  },
+  "exceptions": {
+    "command_failed": {
+      "message": "Der Master hat den Befehl nicht angenommen: {error}"
+    },
+    "entry_not_unique": {
+      "message": "Es sind mehrere oder keine Innoxel Master 2 eingerichtet. Wähle einen mit config_entry_id."
+    },
+    "invalid_input_address": {
+      "message": "{address} ist keine gültige Eingangsadresse. Verwende I10-1 oder GR28."
+    }
+  },
+  "services": {
+    "send_key": {
+      "name": "Taste senden",
+      "description": "Simuliert eine Taste eines Eingangsmoduls: einen kurzen Impuls, oder Drücken und Loslassen einzeln für einen langen Tastendruck.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Master",
+          "description": "Der Master, an den die Taste geht. Nur nötig, wenn mehrere eingerichtet sind."
+        },
+        "address": {
+          "name": "Taste",
+          "description": "Eingangsadresse wie I10-1 oder das Ereignis aus INNOXEL Setup wie GR28."
+        },
+        "action": {
+          "name": "Aktion",
+          "description": "Impuls ist ein kurzer Tastendruck. Drücken und Loslassen ergeben zusammen einen langen Tastendruck."
+        }
+      }
+    }
+  },
+  "selector": {
+    "key_action": {
+      "options": {
+        "impulse": "Impuls",
+        "press": "Drücken",
+        "release": "Loslassen"
+      }
+    }
+  }
+}
