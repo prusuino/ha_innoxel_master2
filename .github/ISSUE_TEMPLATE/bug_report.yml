@@ -1,0 +1,50 @@
+name: Bug report
+description: Something does not work as described
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. The versions and the firmware revision of the master usually save a round of questions.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you saw, and what you expected instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version of Innoxel Master 2
+      description: Settings → Devices & services → Innoxel Master 2, or the Marketplace / HACS entry.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: ha
+    attributes:
+      label: Home Assistant version
+      description: Settings → About.
+      placeholder: "2026.11.2"
+    validations:
+      required: true
+  - type: input
+    id: master
+    attributes:
+      label: Firmware revision of the master and serial device server
+      description: The revision is shown on the device page of the integration. Add the model of the device server.
+      placeholder: "REV 09.23, Moxa NPort 5110"
+  - type: textarea
+    id: log
+    attributes:
+      label: Log lines
+      description: Settings → System → Logs, search for `innoxel_master2`. Leave empty if there are none.
+      render: text
+  - type: checkboxes
+    id: private
+    attributes:
+      label: Before you send
+      options:
+        - label: I removed what I do not want to be public (addresses of my network).
+          required: true

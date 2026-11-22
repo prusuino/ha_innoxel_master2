@@ -1,0 +1,32 @@
+name: Release asset
+
+# Attaches a zip of the integration folder to every published release.
+# HACS and the Home Assistant Marketplace download this file (hacs.json:
+# zip_release + filename), and GitHub counts the asset downloads.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Build innoxel_master2.zip (integration files at the archive root)
+        run: |
+          cd custom_components/innoxel_master2
+          zip -r ../../innoxel_master2.zip . -x '*/__pycache__/*' '*.pyc'
+          cd ../..
+          unzip -l innoxel_master2.zip | head -20
+
+      - name: Upload to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" innoxel_master2.zip --clobber

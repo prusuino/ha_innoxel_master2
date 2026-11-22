@@ -1,0 +1,24 @@
+# Changelog
+
+## 1.0.0 — 2026-11-22
+
+- **French and Italian.** The dialogs, entity names, the action and its error messages are translated into French and Italian, next to German and English.
+- **Documentation.** The README follows the structure of the Innoxel Master 3 integration and describes how the serial device server has to be set up (serial settings and operating mode of a Moxa NPort 5110), how blinds behave, how often the master is read and how INNOXEL Setup stays usable.
+- **Tests.** The serial protocol, the setup dialog, the channel dialogs, the entities, the connection switch and the action are tested against a stand-in master; a workflow runs the tests on every change.
+- **Quality scale: Bronze**, self-assessed; the per-rule status is in `quality_scale.yaml`.
+- **Release file.** A release now carries `innoxel_master2.zip`, which HACS and the Home Assistant Marketplace download.
+- The Home Assistant Marketplace lists the integration under *Hubs & protocols → Building automation*, *Blinds & curtains* and *Lighting*.
+- Nothing changes in how the integration works compared with 0.1.0.
+
+## 0.1.0 — 2026-11-22
+
+First public version.
+
+- Setup by the address and TCP port of the serial device server; the master is asked for its firmware revision.
+- Channels are added one by one: switch, light, dimmer, blind and key. A switch or light finds its output by itself when the address is left empty.
+- Switches and lights show the state the master reports and press their key only when the output is in the other state.
+- Blinds run with a key impulse and stop with an impulse in the running direction.
+- Weather station: temperature, wind speed, sun east/south/west, twilight and rain, when a weather station is connected.
+- Action `innoxel_master2.send_key` for an impulse or a separate press and release.
+- Switch **Connection to the master** releases the device server for INNOXEL Setup.
+- German and English.

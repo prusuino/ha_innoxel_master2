@@ -1,0 +1,29 @@
+name: Tests
+
+# Runs the client, config-flow and integration tests against the Home
+# Assistant test harness for custom integrations
+# (pytest-homeassistant-custom-component). A small TCP server on localhost
+# stands in for the master; no hardware is contacted.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+          cache: pip
+
+      - name: Install the test harness
+        run: python -m pip install --upgrade pip pytest-homeassistant-custom-component
+
+      - name: Run the tests
+        run: python -m pytest -q

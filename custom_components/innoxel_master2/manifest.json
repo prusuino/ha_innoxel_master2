@@ -1,12 +1,14 @@
 {
   "domain": "innoxel_master2",
   "name": "Innoxel Master 2",
+  "categories": ["hubs_protocols.building_automation", "blinds_curtains", "lighting"],
   "codeowners": ["@prusuino"],
   "config_flow": true,
   "documentation": "https://github.com/prusuino/ha_innoxel_master2",
   "integration_type": "hub",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/prusuino/ha_innoxel_master2/issues",
+  "quality_scale": "bronze",
   "requirements": [],
-  "version": "0.1.0"
+  "version": "1.0.0"
 }

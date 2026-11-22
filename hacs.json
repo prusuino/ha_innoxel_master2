@@ -1,5 +1,7 @@
 {
   "name": "Innoxel Master 2",
+  "zip_release": true,
+  "filename": "innoxel_master2.zip",
   "render_readme": true,
   "homeassistant": "2025.4.0"
 }

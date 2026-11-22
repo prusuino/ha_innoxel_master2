@@ -1,0 +1,92 @@
+rules:
+  # Bronze
+  action-setup:
+    status: done
+    comment: The action send_key is registered in async_setup.
+  appropriate-polling:
+    status: done
+    comment: Output and dimmer state every two seconds (the master answers locally and has no push channel), the weather station every thirty seconds.
+  brands: done
+  common-modules:
+    status: done
+    comment: client.py holds the serial protocol, coordinator.py the polling, entity.py the base entity.
+  config-flow: done
+  config-flow-test-coverage: done
+  dependency-transparency:
+    status: done
+    comment: No requirements; the protocol runs over asyncio streams of the standard library.
+  docs-actions: done
+  docs-high-level-description: done
+  docs-installation-instructions: done
+  docs-removal-instructions: done
+  entity-event-setup:
+    status: exempt
+    comment: The entities subscribe to nothing but the coordinator.
+  entity-unique-id: done
+  has-entity-name: done
+  runtime-data:
+    status: done
+    comment: The coordinator, which holds the client, is entry.runtime_data.
+  test-before-configure:
+    status: done
+    comment: The setup dialog asks the master for its firmware revision.
+  test-before-setup: done
+  unique-config-entry:
+    status: done
+    comment: Keyed by host and port of the serial device server.
+
+  # Silver
+  action-exceptions: done
+  config-entry-unloading: done
+  docs-configuration-parameters:
+    status: exempt
+    comment: No options flow; channels are added and changed as subentries.
+  docs-installation-parameters: done
+  entity-unavailable: done
+  integration-owner: done
+  log-when-unavailable: done
+  parallel-updates: todo
+  reauthentication-flow:
+    status: exempt
+    comment: The serial protocol has no login.
+  test-coverage: done
+
+  # Gold
+  devices: done
+  diagnostics: todo
+  discovery:
+    status: exempt
+    comment: A serial device server does not announce the master behind it.
+  discovery-update-info:
+    status: exempt
+    comment: No discovery.
+  docs-data-update: done
+  docs-examples: done
+  docs-known-limitations: done
+  docs-supported-devices: done
+  docs-supported-functions: done
+  docs-troubleshooting: todo
+  docs-use-cases: todo
+  dynamic-devices:
+    status: exempt
+    comment: The master does not report its channels; they are added by hand.
+  entity-category: done
+  entity-device-class: done
+  entity-disabled-by-default: todo
+  entity-translations: done
+  exception-translations: done
+  icon-translations: todo
+  reconfiguration-flow: todo
+  repair-issues: todo
+  stale-devices:
+    status: done
+    comment: A deleted channel (subentry) takes its device and entity with it.
+
+  # Platinum
+  async-dependency:
+    status: exempt
+    comment: No dependency; the client is asynchronous.
+  inject-websession:
+    status: exempt
+    comment: No HTTP.
+  strict-typing: todo
