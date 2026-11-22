@@ -1,5 +1,7 @@
 # Innoxel Master 2 for Home Assistant
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+
 Custom integration for the **Innoxel Master 2** (NOXmaster) building automation
 controller. The Master 2 has no network port; it is reached through a serial
 device server such as a Moxa NPort 5110 in TCP server mode.
@@ -54,3 +56,12 @@ release separately for a long key press.
 
 This is a private project and not affiliated with INNOXEL System AG or
 ZidaTech AG. Use at your own risk.
+
+## License
+
+Copyright (C) 2026 prusuino
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version. It is distributed without any warranty. See [LICENSE](LICENSE).
