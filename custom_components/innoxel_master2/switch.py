@@ -47,10 +47,10 @@ class Master2ToggleEntity(Master2ChannelEntity):
 
     async def _set(self, on: bool) -> None:
         # The key toggles, so only press it when the output is in the other
-        # state. Read the state fresh: the last poll may be two seconds old.
+        # state. Read the state fresh: the last poll may be a second old.
         await self.coordinator.async_refresh()
         if self.is_on != on:
-            await self._send_key(self._key)
+            await self._send_key(self._key, done=lambda: self.is_on == on)
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the output on."""

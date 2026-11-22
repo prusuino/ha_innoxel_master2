@@ -61,8 +61,8 @@ async def test_diagnostics_carry_the_raw_answers_and_hide_the_address(
     assert diagnostics["master"] == {
         "revision": "09.23",
         "connection_in_use": True,
-        "poll_interval_seconds": 2,
-        "weather_every_n_polls": 15,
+        "poll_interval_seconds": 1,
+        "weather_every_n_polls": 30,
         "last_update_success": True,
         "last_error": None,
     }

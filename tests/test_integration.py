@@ -259,3 +259,35 @@ async def test_a_sensor_channel_shows_an_output_and_presses_nothing(
     assert hass.states.get(night).state == STATE_ON
     assert master.keys == []
 
+
+async def test_the_state_is_read_at_once_and_again_while_the_output_lags(
+    hass: HomeAssistant, master: FakeMaster
+) -> None:
+    master.wiring[(10, 1)] = [(0, 3)]
+    entry = await setup(hass, master, channel("switch", "Test lamp", key="I10-1", output="O0-3"))
+    switch = channel_entity(hass, entry, "switch", "Test lamp")
+
+    # Normal case: the first read after the key shows the new state.
+    master.commands.clear()
+    await hass.services.async_call("switch", "turn_on", {"entity_id": switch}, blocking=True)
+    assert master.commands == ["y", "Y04140201", "y"]
+    assert hass.states.get(switch).state == STATE_ON
+
+    # A slow output: the state is read again until it has changed.
+    master.lag = 3
+    master.commands.clear()
+    await hass.services.async_call("switch", "turn_off", {"entity_id": switch}, blocking=True)
+    assert master.commands == ["y", "Y04140201", "y", "y", "y", "y"]
+    assert hass.states.get(switch).state == STATE_OFF
+
+
+async def test_a_key_that_switches_nothing_does_not_hang(hass: HomeAssistant, master: FakeMaster) -> None:
+    entry = await setup(hass, master, channel("switch", "Dead", key="I10-1", output="O0-3"))
+    switch = channel_entity(hass, entry, "switch", "Dead")
+    master.commands.clear()
+    await hass.services.async_call("switch", "turn_on", {"entity_id": switch}, blocking=True)
+    # one read before, the key, then a bounded number of reads
+    assert master.commands.count("Y04140201") == 1
+    assert master.commands.count("y") == 12
+    assert hass.states.get(switch).state == STATE_OFF
+

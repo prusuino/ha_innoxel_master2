@@ -201,3 +201,12 @@ async def test_a_sensor_channel_takes_only_an_output(hass: HomeAssistant, master
     assert subentry.data == {"output": "O8-2"}
     assert master.keys == []  # nothing is pressed for a sensor
 
+
+async def test_detection_waits_for_an_output_that_lags(hass: HomeAssistant, master: FakeMaster) -> None:
+    master.wiring[(10, 1)] = [(0, 3)]
+    master.lag = 2
+    entry = await loaded_entry(hass, master)
+    result = await add_channel(hass, entry, "switch", {CONF_NAME: "Test lamp", "key": "I10-1"})
+    assert result["type"] is FlowResultType.CREATE_ENTRY
+    assert next(iter(entry.subentries.values())).data == {"key": "I10-1", "output": "O0-3"}
+

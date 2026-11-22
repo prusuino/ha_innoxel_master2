@@ -29,7 +29,8 @@ from .const import (
     CONF_OUTPUT_UP,
     DEFAULT_PORT,
     DOMAIN,
-    REFRESH_DELAY,
+    REFRESH_STEP,
+    REFRESH_TRIES,
     SUBENTRY_BUTTON,
     SUBENTRY_COVER,
     SUBENTRY_DIMMER,
@@ -127,9 +128,14 @@ class ChannelSubentryFlow(ConfigSubentryFlow):
         try:
             before = (await client.get_states()).outputs_on()
             await client.send_key(key)
-            await asyncio.sleep(REFRESH_DELAY)
-            after = (await client.get_states()).outputs_on()
-            changed = before ^ after
+            # The first read normally shows the change; give a slow output a
+            # few more reads before deciding that the key switches nothing.
+            for _ in range(REFRESH_TRIES + 1):
+                after = (await client.get_states()).outputs_on()
+                changed = before ^ after
+                if changed:
+                    break
+                await asyncio.sleep(REFRESH_STEP)
             if changed:
                 # Put the output back into the state it had.
                 await client.send_key(key)

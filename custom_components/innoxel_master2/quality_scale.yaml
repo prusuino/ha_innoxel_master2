@@ -5,7 +5,7 @@ rules:
     comment: The action send_key is registered in async_setup.
   appropriate-polling:
     status: done
-    comment: Output and dimmer state every two seconds (the master answers locally and has no push channel), the weather station every thirty seconds.
+    comment: Output and dimmer state every second (one poll takes about 45 ms; the master has no push channel), the weather station every thirty seconds.
   brands: done
   common-modules:
     status: done

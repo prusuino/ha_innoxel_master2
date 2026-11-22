@@ -184,7 +184,7 @@ The switch is on after every restart of Home Assistant. Automations that send ke
 
 ## Polling
 
-The master has no push channel. The integration reads the state of all outputs and dimmers every two seconds and the weather station every thirty seconds; after a key that Home Assistant sent, the state is read back within a fraction of a second. A change made at a wall button shows up after two seconds at the latest.
+The master has no push channel. The integration reads the state of all outputs and dimmers every second and the weather station every thirty seconds; after a key that Home Assistant sent, the state is read back at once (about a tenth of a second on the test bench). A change made at a wall button shows up after one second at the latest.
 
 ## Diagnostics
 

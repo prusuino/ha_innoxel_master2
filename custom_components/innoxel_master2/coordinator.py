@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import timedelta
 import logging
@@ -19,7 +20,7 @@ from .client import (
     States,
     Weather,
 )
-from .const import DOMAIN, REFRESH_DELAY, SCAN_INTERVAL, WEATHER_EVERY
+from .const import DOMAIN, REFRESH_STEP, REFRESH_TRIES, SCAN_INTERVAL, WEATHER_EVERY
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -92,8 +93,24 @@ class Master2Coordinator(DataUpdateCoordinator[Master2Data]):
         # Mark the data as stale so that all channels become unavailable.
         self.async_set_update_error(UpdateFailed("The connection is switched off"))
 
-    async def async_send_key(self, address: Address, action: int = KEY_IMPULSE) -> None:
-        """Simulate a key and read the states back shortly afterwards."""
+    async def async_send_key(
+        self,
+        address: Address,
+        action: int = KEY_IMPULSE,
+        done: Callable[[], bool] | None = None,
+    ) -> None:
+        """Simulate a key and read the states back at once.
+
+        `done` tells whether the effect the caller expects has arrived (e.g.
+        the output is on). While it has not, the states are read again a few
+        times; without it they are read once.
+        """
         await self.client.send_key(address, action)
-        await asyncio.sleep(REFRESH_DELAY)
         await self.async_refresh()
+        if done is None:
+            return
+        for _ in range(REFRESH_TRIES):
+            if not self.last_update_success or done():
+                return
+            await asyncio.sleep(REFRESH_STEP)
+            await self.async_refresh()

@@ -38,6 +38,8 @@ class FakeMaster:
         self.connections = 0
         self.drop_next = 0  # close the connection instead of answering
         self.reject_keys: str | None = None  # return code for key commands
+        self.lag = 0  # state polls a key needs before its outputs change
+        self._pending: list[tuple[int, list[tuple[int, int]]]] = []
         self.server: asyncio.Server | None = None
         self._writers: set[asyncio.StreamWriter] = set()
 
@@ -92,6 +94,14 @@ class FakeMaster:
         if command == "V":
             return frame(f"REV {self.revision}")
         if command == "y":
+            waiting = []
+            for polls_left, outputs in self._pending:
+                if polls_left <= 1:
+                    for output in outputs:
+                        self.outputs ^= {output}
+                else:
+                    waiting.append((polls_left - 1, outputs))
+            self._pending = waiting
             return frame(self.state_string()) + frame("F00")
         if command == "s":
             return frame(self.weather) + frame("F00")
@@ -102,8 +112,12 @@ class FakeMaster:
             action, key = int(command[5:7], 16), int(command[7:9], 16)
             self.keys.append((module, key, action))
             if action == 2:  # impulse
-                for output in self.wiring.get((module, key), []):
-                    self.outputs ^= {output}
+                outputs = self.wiring.get((module, key), [])
+                if self.lag:
+                    self._pending.append((self.lag + 1, outputs))
+                else:
+                    for output in outputs:
+                        self.outputs ^= {output}
             return frame("F00")
         return frame("F06")
 
@@ -124,5 +138,5 @@ async def master(socket_enabled: None) -> AsyncIterator[FakeMaster]:
 @pytest.fixture
 def no_refresh_delay(monkeypatch: pytest.MonkeyPatch) -> None:
     """Skip the pause between a key and the state read that follows it."""
-    monkeypatch.setattr("custom_components.innoxel_master2.coordinator.REFRESH_DELAY", 0)
-    monkeypatch.setattr("custom_components.innoxel_master2.config_flow.REFRESH_DELAY", 0)
+    monkeypatch.setattr("custom_components.innoxel_master2.coordinator.REFRESH_STEP", 0)
+    monkeypatch.setattr("custom_components.innoxel_master2.config_flow.REFRESH_STEP", 0)

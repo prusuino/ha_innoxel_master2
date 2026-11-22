@@ -3,6 +3,7 @@
 ## 1.2.0 — 2026-11-22
 
 - **New channel type: sensor.** *Add sensor* takes an output address and gives a `binary_sensor` with the state of that output, without a key. It is meant for what the master reports among the outputs but Home Assistant should not operate: a 230 V input module (NOXin-0800h, which is addressed like an output) or an output the master uses as a flag, such as the night setback or the release of a weather function.
+- **Faster.** The state of the outputs and dimmers is read every second instead of every two, so a change at a wall button shows up within a second. After a command from Home Assistant the new state is read at once instead of after a fixed pause of 0.3 seconds; the master confirms a key only when it has carried it out. Measured on a Master 2 (REV 09.23) through a Moxa NPort: one state poll takes about 45 ms, and the new state is in Home Assistant about 0.1 seconds after the key.
 - The README names the firmware the interface needs (9.00 or newer, according to Innoxel's documentation of its remote control).
 
 ## 1.1.0 — 2026-11-22

@@ -1,7 +1,7 @@
 """Base entity of the Innoxel Master 2 integration."""
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 
 from homeassistant.config_entries import ConfigSubentry
 from homeassistant.exceptions import HomeAssistantError
@@ -49,9 +49,14 @@ class Master2ChannelEntity(CoordinatorEntity[Master2Coordinator]):
             via_device=(DOMAIN, entry_id),
         )
 
-    async def _send_key(self, address: Address, action: int = KEY_IMPULSE) -> None:
+    async def _send_key(
+        self,
+        address: Address,
+        action: int = KEY_IMPULSE,
+        done: Callable[[], bool] | None = None,
+    ) -> None:
         try:
-            await self.coordinator.async_send_key(address, action)
+            await self.coordinator.async_send_key(address, action, done)
         except Master2Error as err:
             raise HomeAssistantError(
                 translation_domain=DOMAIN,
